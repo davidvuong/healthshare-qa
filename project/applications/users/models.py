@@ -20,6 +20,8 @@ class User(BaseModel,
         unique=True,
     )
 
+    first_name = models.CharField(max_length=32, null=True, blank=True)
+
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
@@ -28,10 +30,10 @@ class User(BaseModel,
     objects = UserManager()
 
     def get_full_name(self):
-        return self.email
+        return self.first_name if self.first_name else self.email
 
     def get_short_name(self):
-        return self.email
+        return self.first_name if self.first_name else self.email
 
     @property
     def is_staff(self):

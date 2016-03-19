@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'project.applications.common',
     'project.applications.authentication',
     'project.applications.users.apps.UsersConfig',
+    'project.applications.questions',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -114,7 +115,9 @@ REST_FRAMEWORK = {
     # @see: http://www.django-rest-framework.org/api-guide/permissions/
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
-    )
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
 }
 
 # Logging configuration
