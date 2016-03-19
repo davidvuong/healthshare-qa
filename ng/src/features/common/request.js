@@ -10,9 +10,11 @@ class Request {
   }
 
   _request(method, url, data) {
-    const request = {
-      method, data, url: `${config.ENDPOINT}${url}`
-    };
+    if (!url.startsWith(config.ENDPOINT)) {
+      url = `${config.ENDPOINT}${url}`
+    }
+
+    const request = { method, data, url };
     if (this.token) {
       request.headers = { Authorization: `Token ${this.token}` };
     }

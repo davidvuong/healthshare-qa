@@ -9,7 +9,14 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container questions-container">
     <questions questions="home.questions"></questions>
+    <div class="pagination">
+      <button class="btn btn-primary btn-large"
+              ng-click="home.next()"
+              ng-hide="home.isLoadingMore || !home.hasNext()">Load more</button>
+      <span ng-hide="!home.isLoadingMore">Loading...</span>
+      <span ng-show="!home.hasNext()">You've reached the end</span>
+    </div>
   </div>
 </div>

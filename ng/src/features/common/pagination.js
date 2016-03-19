@@ -60,9 +60,9 @@ class PaginationResource {
     const deferred = this.$q.defer();
     if (!this.hasNext()) {
       deferred.reject();
-      return deferred;
+      return deferred.promise;
     }
-    this.request.get().then((res) => {
+    this.request.get(this.data.next).then((res) => {
       this._updateData(res.data);
       deferred.resolve();
     }, deferred.reject);
