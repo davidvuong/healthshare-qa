@@ -1,9 +1,27 @@
-<div class="login-page container">
-  <h1>Welcome to the {{ login.name }} page!</h1>
+<div class="login-page">
+  <div class="alert alert-success" role="alert" ng-show="login.status === 'success'">
+    Authentication successful
+  </div>
+  <div class="alert alert-danger" role="alert" ng-show="login.status === 'failed'">
+    Authentication failed
+  </div>
+  <div class="container">
+    <form ng-submit="login.authorize()">
+      <h1>HealthShare Q&A</h1>
 
-  <form ng-submit="login.authorize()">
-    <input type="email" ng-model="login.email">
-    <input type="password" ng-model="login.password">
-    <button type="submit" class="btn btn-primary">Login</button>
-  </form>
+      <div class="input-group">
+        <input class="form-control" type="email" ng-model="login.email" placeholder="Email address">
+        <input class="form-control" type="password" ng-model="login.password" placeholder="Password">
+        <br/>
+        <button type="submit" class="btn btn-primary btn-lg">
+          <span ng-show="login.status === 'authenticating'">
+            Authenticating...
+          </span>
+          <span ng-show="login.status !== 'authenticating'">
+            Log into HealthShare
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

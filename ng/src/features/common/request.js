@@ -4,9 +4,10 @@ import config from './config';
 class Request {
   constructor($http) {
     this.$http = $http;
+  }
 
-    /* Attempt to retrieve the auth token from localStorage. */
-    this.token = localStorage.getItem(config.AUTH_KEY);
+  get _token() {
+    return localStorage.getItem(config.AUTH_KEY);
   }
 
   _request(method, url, data) {
@@ -15,8 +16,8 @@ class Request {
     }
 
     const request = { method, data, url };
-    if (this.token) {
-      request.headers = { Authorization: `Token ${this.token}` };
+    if (this._token) {
+      request.headers = { Authorization: `Token ${this._token}` };
     }
     return this.$http(request);
   }

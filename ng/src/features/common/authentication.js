@@ -32,6 +32,9 @@ class Authentication {
 
     this.request.post(endpoint, payload).then((res) => {
       this.current = res.data.user;
+      this.token = res.data.token;
+
+      localStorage.setItem(config.AUTH_KEY, this.token);
       deferred.resolve(this.current);
     }, deferred.reject);
     return deferred.promise;
