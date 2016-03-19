@@ -18,6 +18,25 @@ class Authentication {
     return !!this.token;
   }
 
+  _authorize(email, password) {
+    const deferred = this.$q.defer();
+    if (this.hasAuthorized()) {
+      deferred.resolve(this.current);
+      return deferred.promise;
+    }
+
+    const endpoint = '/api/auth/authenticate/';
+    const payload = {};
+    if (email)    { payload.email = email; }
+    if (password) { payload.password = password; }
+
+    this.request.post(endpoint, payload).then((res) => {
+      this.current = res.data.user;
+      deferred.resolve(this.current);
+    }, deferred.reject);
+    return deferred.promise;
+  }
+
   /* Makes a HTTP request to authorize with email/password. */
   authorize(email, password) {
     const deferred = this.$q.defer();
@@ -25,34 +44,12 @@ class Authentication {
       deferred.reject();
       return deferred.promise;
     }
-    if (this.hasAuthorized()) {
-      deferred.resolve(this.current);
-      return deferred.promise;
-    }
-
-    this.request.post('/api/auth/authenticate/', { email, password }).then((res) => {
-      this.current = res.data.user;
-      this.token = res.data.token;
-
-      localStorage.setItem(config.AUTH_KEY, this.token);
-      deferred.resolve(this.current);
-    }, deferred.reject);
-    return deferred.promise;
+    return this._authorize(email, password);
   }
 
   /* Makes a HTTP request to authorize the user with just the token. */
   authorizeWithToken() {
-    const deferred = this.$q.defer();
-    if (this.hasAuthorized()) {
-      deferred.resolve(this.current);
-      return deferred.promise;
-    }
-
-    this.request.post('/api/auth/authenticate/', {}).then((res) => {
-      this.current = res.data.user;
-      deferred.resolve(this.current);
-    }, deferred.reject);
-    return deferred.promise;
+    return this._authorize();
   }
 
   logout() {

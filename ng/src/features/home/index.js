@@ -1,9 +1,11 @@
-import './Home.scss';
+import './home.scss';
 import angular from 'angular';
 import routing from './home.routes';
 import HomeController from './home.ctrl';
 
-export default angular.module('app.home', [])
+import questions from './components/questions.directive';
+
+export default angular.module('app.home', [questions])
   .config(routing)
   .controller('HomeController', HomeController)
   .name;

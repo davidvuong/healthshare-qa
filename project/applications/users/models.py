@@ -29,11 +29,14 @@ class User(BaseModel,
 
     objects = UserManager()
 
-    def get_full_name(self):
+    def _get_name(self):
         return self.first_name if self.first_name else self.email
 
+    def get_full_name(self):
+        return self._get_name()
+
     def get_short_name(self):
-        return self.first_name if self.first_name else self.email
+        return self._get_name()
 
     @property
     def is_staff(self):

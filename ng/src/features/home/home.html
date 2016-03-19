@@ -1,4 +1,15 @@
 <div class="home-page">
-  <h1>Welcome to the {{ home.name }} page!</h1>
-  <a href="" ng-click="home.logout()">log out</a>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>HealthShare QA</h1>
+      <p>
+        HealthShare NSW is a statewide organisation established to provide high-quality shared services to support the delivery of patient care within the NSW Health system.
+      </p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Ask a question</a></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <questions questions="home.questions"></questions>
+  </div>
 </div>

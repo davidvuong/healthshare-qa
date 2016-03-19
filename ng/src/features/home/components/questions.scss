@@ -1,0 +1,21 @@
+.questions {
+  padding-bottom: 80px;
+
+  .question-created-at {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    font-size: 12px;
+    opacity: 0.5;
+  }
+
+  .media {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 8px;
+  }
+
+  .media-body {
+    position: relative;
+  }
+}
