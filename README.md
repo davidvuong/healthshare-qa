@@ -12,7 +12,7 @@ HealthShare QA's project structure is based off a Django+Angular boilerplate I w
 1. Clone the project repository:
 
   ```bash
-  git clone https://github.com/davidvuong/healthshar-qa
+  git clone git@github.com:davidvuong/healthshare-qa.git
   ```
 
 1. Create a virtualenv for your project:
@@ -36,7 +36,7 @@ HealthShare QA's project structure is based off a Django+Angular boilerplate I w
   ```bash
   nvm install 5.8.0
   nvm use 5.8.0
-  
+
   cd healthshare-qa/ng/
   npm install
   ```
