@@ -1,16 +1,16 @@
-<div class="questions">
+<div class="questions-list">
   <div class="media" ng-repeat="question in questions">
     <div class="media-left">
       <div class="media-body">
         <h4 class="media-heading">
-          <a ng-href="/questions/{{ question.id }}/">
+          <a ng-href="/questions/{{ question.id }}">
             {{ question.title }}
             <span class="badge">{{ question.score }}</span>
           </a>
         </h4>
         {{ question.description|limitTo:240 }}<!--
         --><span ng-show="question.description.length > 240">
-          ... <a ng-href="/questions/{{ question.id }}/">See more</a>
+          ... <a ng-href="/questions/{{ question.id }}">See more</a>
         </span>
 
         <span class="question-created-at">

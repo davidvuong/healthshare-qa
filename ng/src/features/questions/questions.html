@@ -1,0 +1,36 @@
+<div class="questions-page container">
+  <ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li class="active">Question</li>
+  </ol>
+  <div class="page-header">
+    <h1>{{ questions.question.title }}
+      <small>
+        Asked @ {{ questions.question.created_at | date:'yyyy-MM-dd' }}
+      </small>
+    </h1>
+  </div>
+  <div class="question-description">
+    <div class="well">
+      {{ questions.question.description }}
+    </div>
+  </div>
+  <div class="question-meta pull-right">
+    Score <span class="badge">{{ questions.question.score }}</span> |
+    Answers <span class="badge">{{ questions.question.answer_count }}</span>
+  </div>
+
+  <!--answers list & answer input-->
+  <div class="well well-lg" ng-show="!answers || answers.length === 0">
+    No one has answered this question yet, be the first to answer!
+  </div>
+  <div class="form-group submit-form">
+    <label>Answer:</label>
+    <textarea class="form-control" rows="5" ng-model="questions.answer"></textarea>
+    <button
+      class="btn btn-primary pull-right"
+      ng-disabled="!questions.answer"
+      ng-click="questions.submitAnswer()">Submit</button>
+  </div>
+  <answers answers="questions.answers"></answers>
+</div>

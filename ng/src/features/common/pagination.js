@@ -30,6 +30,17 @@ class PaginationResource {
     this.data_m.prev = data.prev;
   }
 
+  /* Finds and returns the resource given the id. */
+  find(id) {
+    return _.filter(this.resources, i => i.id === id)[0];
+  }
+
+  /* Updates the paginator by adding `resource` to be beginning of list. */
+  prepend(resource) {
+    this.resources.unshift(resource);
+    this.data.count++;
+  }
+
   /* Performs an initial fetch, resetting `data_m`. */
   fetch(force = false) {
     const deferred = this.$q.defer();
@@ -75,7 +86,7 @@ class Pagination {
     this.$q = $q;
     this.request = request;
 
-    this.cache = [];
+    this.cache = {};
   }
 
   _create(endpoint) {

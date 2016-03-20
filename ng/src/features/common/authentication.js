@@ -6,22 +6,26 @@ class Authentication {
     this.$q = $q;
     this.request = request;
 
-    this.current = null;
-    this.token = localStorage.getItem(config.AUTH_KEY);
+    this.current_m = null;
+    this.token_m = localStorage.getItem(config.AUTH_KEY);
+  }
+
+  get current() {
+    return this.current_m;
   }
 
   hasAuthorized() {
-    return !!this.current;
+    return !!this.current_m;
   }
 
   isAuthorized() {
-    return !!this.token;
+    return !!this.token_m;
   }
 
   _authorize(email, password) {
     const deferred = this.$q.defer();
     if (this.hasAuthorized()) {
-      deferred.resolve(this.current);
+      deferred.resolve(this.current_m);
       return deferred.promise;
     }
 
@@ -31,11 +35,11 @@ class Authentication {
     if (password) { payload.password = password; }
 
     this.request.post(endpoint, payload).then((res) => {
-      this.current = res.data.user;
-      this.token = res.data.token;
+      this.current_m = res.data.user;
+      this.token_m = res.data.token;
 
-      localStorage.setItem(config.AUTH_KEY, this.token);
-      deferred.resolve(this.current);
+      localStorage.setItem(config.AUTH_KEY, this.token_m);
+      deferred.resolve(this.current_m);
     }, deferred.reject);
     return deferred.promise;
   }
@@ -59,8 +63,8 @@ class Authentication {
     if (!this.isAuthorized()) { return; }
 
     localStorage.removeItem(config.AUTH_KEY);
-    this.current = null;
-    this.token = null;
+    this.current_m = null;
+    this.token_m = null;
   }
 }
 

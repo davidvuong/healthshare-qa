@@ -5,6 +5,7 @@ import uirouter from 'angular-ui-router';
 import common from '../features/common';
 import login from '../features/login';
 import home from '../features/home';
+import questions from '../features/questions';
 
 /* Global application configuration. */
 function config($urlRouterProvider, $locationProvider) {
@@ -44,7 +45,8 @@ angular.module('app', [
   uirouter,
   common,
   login,
-  home
+  home,
+  questions
 ])
   .config(config)
   .run(run);

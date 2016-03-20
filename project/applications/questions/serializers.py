@@ -26,9 +26,9 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 class AnswerSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = UserSerializer(read_only=True)
 
     class Meta(object):
         model = Answer
-        fields = ('id', 'user', 'description', 'created_at', 'updated_at',)
+        fields = ('id', 'user', 'description', 'question', 'created_at', 'updated_at',)
         read_only_fields = ('id', 'created_at', 'updated_at',)

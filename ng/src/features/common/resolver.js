@@ -9,10 +9,13 @@ class Resolver {
 
   resolve($q, authentication) {
     const deferred = $q.defer();
+
+    // Try authenticating with token to retrieve the user object.
     if (authentication.isAuthorized()) {
       const promise = authentication.authorizeWithToken();
       promise.then(deferred.resolve, deferred.reject);
     } else {
+      // Accessing a page without authentication.
       deferred.reject();
     }
     return deferred.promise;
