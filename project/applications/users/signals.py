@@ -8,4 +8,5 @@ from rest_framework.authtoken.models import Token
 @receiver(post_save, sender='users.User', dispatch_uid='users.post_save')
 def user_post_save(sender, instance=None, created=False, **kwargs):
     if created:
+        # Automatically create an authentication token upon `create`.
         Token.objects.create(user=instance)

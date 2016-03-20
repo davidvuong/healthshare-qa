@@ -45,5 +45,6 @@ class AnswerSerializer(serializers.ModelSerializer):
         read_only_fields = ('id', 'score', 'created_at', 'updated_at',)
 
     def get_has_voted(self, obj):
+        """Used to determine whether to show vote actions or not."""
         user = self.context['request'].user
         return Vote.objects.filter(user=user, answer=obj).exists()

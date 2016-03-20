@@ -16,9 +16,10 @@ class Question(BaseModel):
         return self.answer_set.count()
 
     def get_score(self):
+        """Score is calculated based on the score of all answers for `self`."""
         score = Question.objects.filter(id=self.id)
         score = score.aggregate(Sum('answer__score'))
-        return score['answer__score__sum']
+        return score['answer__score__sum'] or 0
 
 
 class Answer(BaseModel):

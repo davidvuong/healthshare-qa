@@ -24,6 +24,8 @@ class AuthenticationViewSet(viewsets.GenericViewSet):
     def _validate_credentials(self, email, password):
         if not email or not password:
             raise exceptions.PermissionDenied()
+
+        # Delegate authentication to Django.
         user = authenticate(username=email, password=password)
         if not user:
             raise exceptions.PermissionDenied()

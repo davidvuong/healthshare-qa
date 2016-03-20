@@ -19,6 +19,7 @@ class QuestionViewSet(mixins.ListModelMixin,
     serializer_class = QuestionSerializer
 
     def get_queryset(self):
+        # Sort questions objects by score only when trying to paginate resources.
         if self.action == 'list':
             queryset = Question.objects.all()
             queryset = queryset.annotate(score=Sum('answer__score'))

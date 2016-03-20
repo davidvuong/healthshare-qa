@@ -17,5 +17,5 @@ class Vote(BaseModel):
     answer = models.ForeignKey('questions.Answer')
     type = models.CharField(max_length=16, choices=TYPE_CHOICES)
 
-    # `-1` if `type == DOWNVOTE` else `1` (used to easier score calculations).
+    # `-1` if `type == DOWNVOTE` else `1` (used for easier score calculations).
     value = models.PositiveSmallIntegerField()
