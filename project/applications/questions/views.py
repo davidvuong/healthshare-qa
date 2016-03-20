@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.shortcuts import get_object_or_404
+from django.db.models import Sum
 from rest_framework import mixins, viewsets, status
 from rest_framework.response import Response
 from rest_framework_extensions.decorators import action
@@ -16,6 +17,14 @@ class QuestionViewSet(mixins.ListModelMixin,
                       viewsets.GenericViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+
+    def get_queryset(self):
+        if self.action == 'list':
+            queryset = Question.objects.all()
+            queryset = queryset.annotate(score=Sum('answer__score'))
+            queryset = queryset.order_by('-score')
+            return queryset
+        return self.queryset
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
