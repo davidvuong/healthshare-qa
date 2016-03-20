@@ -1,7 +1,12 @@
 <div class="answers-list">
   <div class="media" ng-repeat="answer in answers">
+    <div class="vote-actions" ng-hide="answer.has_voted">
+      <div class="upvote text text-success" ng-click="vote(answer, 'up')">⬆</div>
+      <div class="downvote text-danger" ng-click="vote(answer, 'down')">⬇</div>
+    </div>
     <div class="media-left">
       <img class="media-object" src="http://localhost:8000/static/images/avatar.png" alt="">
+      <div class="badge score">{{ answer.score }}</div>
     </div>
     <div class="media-body">
       <h4 class="media-heading">{{ answer.user.email }}</h4>

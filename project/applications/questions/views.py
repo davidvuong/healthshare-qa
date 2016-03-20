@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.shortcuts import get_object_or_404
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, viewsets, status
+from rest_framework.response import Response
+from rest_framework_extensions.decorators import action
 
 from project.applications.questions.models import Question, Answer
 from project.applications.questions.serializers import QuestionSerializer
@@ -31,3 +33,13 @@ class AnswerViewSet(mixins.ListModelMixin,
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+    @action(methods=['POST'])
+    def up(self, request, **kwargs):
+        self.get_object().upvote(request.user)
+        return Response(status=status.HTTP_200_OK)
+
+    @action(methods=['POST'])
+    def down(self, request, **kwargs):
+        self.get_object().downvote(request.user)
+        return Response(status=status.HTTP_200_OK)

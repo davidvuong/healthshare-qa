@@ -1,3 +1,23 @@
 .answers-list {
+  .media, .media-left {
+    position: relative;
+  }
 
+  .vote-actions {
+    font-size: 22px;
+
+    position: absolute;
+    height: 100%;
+    z-index: 1;
+
+    .upvote, .downvote {
+      cursor: pointer;
+    }
+  }
+
+  .score {
+    position: absolute;
+    bottom: 2px;
+    right: 12px;
+  }
 }

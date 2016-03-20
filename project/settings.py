@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'project.applications.authentication',
     'project.applications.users.apps.UsersConfig',
     'project.applications.questions',
+    'project.applications.votes.apps.VotesConfig',
 ]
 
 MIDDLEWARE_CLASSES = [

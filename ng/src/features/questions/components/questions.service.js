@@ -35,6 +35,17 @@ class Questions {
     }, deferred.reject);
     return deferred.promise;
   }
+
+  /* Up or down vote an answer (determined by `type`). */
+  voteAnswer(questionId, answerId, type) {
+    const deferred = this.$q.defer();
+
+    const endpoint = `/api/questions/${questionId}/answers/${answerId}/${type}/`;
+    this.request.post(endpoint, {}).then(() => {
+      deferred.resolve();
+    }, deferred.reject);
+    return deferred.promise;
+  }
 }
 
 export default angular.module('services.questions', [])
