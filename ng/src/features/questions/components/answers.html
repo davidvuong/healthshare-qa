@@ -1,5 +1,8 @@
 <div class="answers-list">
   <div class="media" ng-repeat="answer in answers">
+    <div class="media-left">
+      <img class="media-object" src="http://localhost:8000/static/images/avatar.png" alt="">
+    </div>
     <div class="media-body">
       <h4 class="media-heading">{{ answer.user.email }}</h4>
       {{ answer.description }}
