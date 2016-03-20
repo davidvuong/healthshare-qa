@@ -86,3 +86,9 @@ open http://localhost:8080
 # Django + DRF REST API:
 open http://localhost:8000
 ```
+
+## Final Notes & Comments
+
+* HealthShare QA has only been tested on Chrome
+* Most of the focus was on the Django REST API and AngularJS client-side (minimal focus was put to the interface, using standard Bootstrap components)
+* Didn't have time to write any e2e or unit tests
