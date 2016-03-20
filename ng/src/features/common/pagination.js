@@ -15,12 +15,8 @@ class PaginationResource {
   set data(data) { this.data_m = data; }
   get data()     { return this.data_m; }
 
-  get resources() {
-    return this.data.results;
-  }
-  get length() {
-    return this.resources.length;
-  }
+  get resources() { return this.data.results;     }
+  get length()    { return this.resources.length; }
 
   _updateData(data) {
     _.each(data.results, (resource) => {
@@ -57,6 +53,7 @@ class PaginationResource {
     return deferred.promise;
   }
 
+  /* Determines if there's another page available. */
   hasNext() {
     if (!this.data) {
       return false;
@@ -67,6 +64,7 @@ class PaginationResource {
     return !!this.data.next;
   }
 
+  /* Retrieves the next pagination page if exists. */
   next() {
     const deferred = this.$q.defer();
     if (!this.hasNext()) {

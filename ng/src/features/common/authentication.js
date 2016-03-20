@@ -10,17 +10,9 @@ class Authentication {
     this.token_m = localStorage.getItem(config.AUTH_KEY);
   }
 
-  get current() {
-    return this.current_m;
-  }
-
-  hasAuthorized() {
-    return !!this.current_m;
-  }
-
-  isAuthorized() {
-    return !!this.token_m;
-  }
+  get current()   { return this.current_m;   }
+  hasAuthorized() { return !!this.current_m; }
+  isAuthorized()  { return !!this.token_m;   }
 
   _authorize(email, password) {
     const deferred = this.$q.defer();
@@ -34,6 +26,7 @@ class Authentication {
     if (email)    { payload.email = email; }
     if (password) { payload.password = password; }
 
+    /* Authenticate `user` and cache authentication in browser. */
     this.request.post(endpoint, payload).then((res) => {
       this.current_m = res.data.user;
       this.token_m = res.data.token;
@@ -62,6 +55,7 @@ class Authentication {
   logout() {
     if (!this.isAuthorized()) { return; }
 
+    // Don't forget to clear all authentication data!
     localStorage.removeItem(config.AUTH_KEY);
     this.current_m = null;
     this.token_m = null;
