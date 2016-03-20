@@ -10,9 +10,13 @@ from project.applications.questions.serializers import AnswerSerializer
 
 class QuestionViewSet(mixins.ListModelMixin,
                       mixins.RetrieveModelMixin,
+                      mixins.CreateModelMixin,
                       viewsets.GenericViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class AnswerViewSet(mixins.ListModelMixin,

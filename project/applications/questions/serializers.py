@@ -8,7 +8,7 @@ from project.applications.users.serializers import UserSerializer
 class QuestionSerializer(serializers.ModelSerializer):
     answer_count = serializers.ReadOnlyField(source='get_answer_count')
     score = serializers.ReadOnlyField(source='get_score')
-    user = UserSerializer()
+    user = UserSerializer(read_only=True)
 
     class Meta(object):
         model = Question

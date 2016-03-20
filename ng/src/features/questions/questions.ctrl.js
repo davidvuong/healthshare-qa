@@ -13,7 +13,7 @@ export default class QuestionsController {
   }
 
   submitAnswer() {
-    this.questions.create(this.question.id, this.answer).then((res) => {
+    this.questions.createAnswer(this.question.id, this.answer).then((res) => {
       this.paginator.prepend(res);
       this.answer = null;
     });

@@ -5,14 +5,33 @@
       <p>
         HealthShare NSW is a statewide organisation established to provide high-quality shared services to support the delivery of patient care within the NSW Health system.
       </p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Ask a question</a></p>
+      <p>
+        <a class="btn btn-primary btn-lg" href="" ng-click="home.askQuestion()">Ask a question</a>
+        <a class="logout" href="" ng-click="home.logout()">Log out</a>
+      </p>
 
-      <a href="" ng-click="home.logout()">Log out</a>
-    </div>
+      <div class="form-group question-form" ng-show="home.showQuestionForm">
+        <label>Title:</label>
+        <input type="text"
+               class="form-control"
+               ng-model="home.question.title"
+               placeholder="Question title">
+
+        <label>Description:</label>
+        <textarea class="form-control"
+                  rows="5"
+                  ng-model="home.question.description"
+                  placeholder="Question description"></textarea>
+        <button
+          class="btn btn-primary pull-right"
+          ng-disabled="!home.question.title || !home.question.description"
+          ng-click="home.submitQuestion()">Ask HealthShare</button>
+      </div>
+      </div>
   </div>
 
   <div class="container questions-container">
-    <questions questions="home.questions"></questions>
+    <questions questions="home.resources"></questions>
     <div class="pagination">
       <button class="btn btn-primary btn-large"
               ng-click="home.next()"

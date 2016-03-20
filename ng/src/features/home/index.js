@@ -3,7 +3,7 @@ import angular from 'angular';
 import routing from './home.routes';
 import HomeController from './home.ctrl';
 
-import questions from './components/questions.directive';
+import questions from '../questions/components/questions.directive';
 
 export default angular.module('app.home', [questions])
   .config(routing)

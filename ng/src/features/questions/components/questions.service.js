@@ -14,7 +14,17 @@ class Questions {
     return deferred.promise;
   }
 
-  create(questionId, answer) {
+  createQuestion(title, description) {
+    const deferred = this.$q.defer();
+
+    const payload = { title, description };
+    this.request.post('/api/questions/', payload).then((res) => {
+      deferred.resolve(res.data);
+    }, deferred.reject);
+    return deferred.promise;
+  }
+
+  createAnswer(questionId, answer) {
     const deferred = this.$q.defer();
 
     const endpoint = `/api/questions/${questionId}/answers/`;
